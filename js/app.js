@@ -57,6 +57,7 @@ function displayNewThree(){
   displayPicThree.addEventListener('click', handleClick);
 }
 
+var clicks = 0;
 function handleClick(e){
   e.preventDefault();
   console.log(e.target.id);
@@ -72,7 +73,8 @@ function handleClick(e){
     newThree[2].votes++;
     console.log(newThree[2]);
   }
-  displayNewThree();
+  clicks++;
+  if(clicks < 25) displayNewThree();
 }
 
 
