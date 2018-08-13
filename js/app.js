@@ -10,6 +10,7 @@ var allProducts = [];
 // constuctor for items
 function Product(pathTo) {
   this.pathTo = pathTo;
+  this.timesShown = 0;
   this.votes = 0;
   allProducts.push(this);
 }
@@ -37,7 +38,7 @@ var waterCan = new Product('img/water-can.jpg');
 var wineGlass = new Product('img/wine-glass.jpg');
 
 var newThree = [];
-var lastThree = []
+var lastThree = [];
 function displayNewThree(){
   newThree = [];
   while (newThree.length < 3){
@@ -50,10 +51,13 @@ function displayNewThree(){
   }
   lastThree = newThree;
   displayPicOne.src = newThree[0].pathTo;
+  newThree[0].timesShown++;
   displayPicOne.addEventListener('click', handleClick);
   displayPicTwo.src = newThree[1].pathTo;
+  newThree[1].timesShown++;
   displayPicTwo.addEventListener('click', handleClick);
   displayPicThree.src = newThree[2].pathTo;
+  newThree[2].timesShown++;
   displayPicThree.addEventListener('click', handleClick);
 }
 
@@ -75,6 +79,7 @@ function handleClick(e){
   }
   clicks++;
   if(clicks < 25) displayNewThree();
+  // else showResults()
 }
 
 
