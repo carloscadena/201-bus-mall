@@ -50,8 +50,30 @@ function displayNewThree(){
   }
   lastThree = newThree;
   displayPicOne.src = newThree[0].pathTo;
+  displayPicOne.addEventListener('click', handleClick);
   displayPicTwo.src = newThree[1].pathTo;
+  displayPicTwo.addEventListener('click', handleClick);
   displayPicThree.src = newThree[2].pathTo;
+  displayPicThree.addEventListener('click', handleClick);
 }
+
+function handleClick(e){
+  e.preventDefault();
+  console.log(e.target.id);
+  if(e.target.id === 'first-pic'){
+    newThree[0].votes++;
+    console.log(newThree[0]);
+  }
+  if(e.target.id === 'second-pic'){
+    newThree[1].votes++;
+    console.log(newThree[1]);
+  }
+  if(e.target.id === 'third-pic'){
+    newThree[2].votes++;
+    console.log(newThree[2]);
+  }
+  displayNewThree();
+}
+
 
 displayNewThree();
