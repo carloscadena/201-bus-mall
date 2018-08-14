@@ -64,22 +64,22 @@ function displayNewThree(){
 
 // display results after 25 clicks
 function showResults(){
-  // var resultsList = document.getElementById('list-results')
-
-  // for(var i = 0; i < allProducts.length; i++){
-  //   var newLi = document.createElement('li');
-  //   newLi.textContent = `${allProducts[i].item} - times shown: ${allProducts[i].timesShown} - selected ${allProducts[i].votes}`;
-  //   resultsList.appendChild(newLi);
-  // }
   document.getElementById('pic-container').setAttribute('style', 'display:none');
   var names = [];
   var votes = [];
+  var colors = [];
+  var dynamicColors = function() {
+    var r = Math.floor(Math.random() * 255);
+    var g = Math.floor(Math.random() * 255);
+    var b = Math.floor(Math.random() * 255);
+    return 'rgb(' + r + ',' + g + ',' + b + ')';
+  };
   for (var i = 0; i < allProducts.length; i++){
     names.push(allProducts[i].item);
     votes.push(allProducts[i].votes);
+    colors.push(dynamicColors());
+    
   }
-  console.log(names);
-  console.log(votes);
   var ctx = document.getElementById("myChart").getContext('2d');
   var myChart = new Chart(ctx, {
     type: 'bar',
@@ -88,30 +88,17 @@ function showResults(){
       datasets: [{
         label: '# of Votes',
         data: votes,
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
-        ],
-        borderColor: [
-          'rgba(255,99,132,1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
-        ],
+        backgroundColor: colors,
+        borderColor: colors,
         borderWidth: 1
       }]
     },
     options: {
       scales: {
-        yAxes: [{
+        xAxes: [{
           ticks: {
-            beginAtZero:true
+            beginAtZero:true,
+            autoSkip: false
           }
         }]
       }
@@ -134,7 +121,7 @@ function handleClick(e){
     newThree[2].votes++;
   }
   clicks++;
-  if(clicks < 5) displayNewThree();
+  if(clicks < 25) displayNewThree();
   else {
     displayPicOne.removeEventListener('click', handleClick);
     displayPicTwo.removeEventListener('click', handleClick);
