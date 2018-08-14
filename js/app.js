@@ -68,6 +68,7 @@ function showResults(){
   var names = [];
   var votes = [];
   var colors = [];
+  var shown = []
   var dynamicColors = function() {
     var r = Math.floor(Math.random() * 255);
     var g = Math.floor(Math.random() * 255);
@@ -78,6 +79,8 @@ function showResults(){
     names.push(allProducts[i].item);
     votes.push(allProducts[i].votes);
     colors.push(dynamicColors());
+    shown.push(allProducts[i].timesShown);
+
     
   }
   var ctx = document.getElementById("myChart").getContext('2d');
@@ -86,9 +89,16 @@ function showResults(){
     data: {
       labels: names,
       datasets: [{
-        label: '# of Votes',
+        label: 'Votes',
         data: votes,
         backgroundColor: colors,
+        borderColor: colors,
+        borderWidth: 1
+      },
+      {
+        label: 'Shown',
+        data: shown,
+        // backgroundColor: colors,
         borderColor: colors,
         borderWidth: 1
       }]
@@ -98,7 +108,8 @@ function showResults(){
         xAxes: [{
           ticks: {
             beginAtZero:true,
-            autoSkip: false
+            autoSkip: false,
+            stacked: true
           }
         }]
       }
