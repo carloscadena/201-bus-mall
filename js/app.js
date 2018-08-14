@@ -44,7 +44,7 @@ function displayNewThree(){
   newThree = [];
   while (newThree.length < 3){
     var idx = Math.floor(Math.random() * allProducts.length);
-    if (newThree.includes(allProducts[idx] || lastThree.includes(allProducts[idx]))){
+    if (newThree.includes(allProducts[idx]) || lastThree.includes(allProducts[idx])){
       continue;
     } else {
       newThree.push(allProducts[idx]);
@@ -62,6 +62,7 @@ function displayNewThree(){
   displayPicThree.addEventListener('click', handleClick);
 }
 
+// display results after 25 clicks
 function showResults(){
   var resultsList = document.getElementById('list-results')
 
@@ -70,29 +71,31 @@ function showResults(){
     newLi.textContent = `${allProducts[i].item} - times shown: ${allProducts[i].timesShown} - selected ${allProducts[i].votes}`;
     resultsList.appendChild(newLi);
   }
-  document.getElementById('pic-container').setAttribute('style', 'display:none')
+  document.getElementById('pic-container').setAttribute('style', 'display:none');
 
 }
 
+// manage the clicks
 var clicks = 0;
 function handleClick(e){
   e.preventDefault();
-  console.log(e.target.id);
   if(e.target.id === 'first-pic'){
     newThree[0].votes++;
-    console.log(newThree[0]);
   }
   if(e.target.id === 'second-pic'){
     newThree[1].votes++;
-    console.log(newThree[1]);
   }
   if(e.target.id === 'third-pic'){
     newThree[2].votes++;
-    console.log(newThree[2]);
   }
   clicks++;
-  if(clicks < 5) displayNewThree();
-  else showResults();
+  if(clicks < 25) displayNewThree();
+  else {
+    displayPicOne.removeEventListener('click', handleClick);
+    displayPicTwo.removeEventListener('click', handleClick);
+    displayPicThree.removeEventListener('click', handleClick);
+    showResults();
+  }
 }
 
 
