@@ -12,13 +12,6 @@ header {
   height: 75px;
 }
 
-h1 {
-  padding-top: 20px;
-  padding-left: 10px;
-  font-size: 40px;
-  font-weight: bold;
-}
-
 div img {
   width: auto;
   max-height: 200px;
@@ -48,4 +41,32 @@ canvas {
   display: none;
   position: center;
   margin: 15px auto;
+}
+
+a {
+  text-decoration: none;
+  color: #060B17;
+}
+
+a:hover { 
+  color: rgb(137, 142, 155);
+}
+
+h1 {
+  padding-top: 10px;
+  padding-left: 10px;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+#results-button {
+  float: right;
+  position: relative;
+  margin-top: -25px;
+  padding-right: 20px;
+  cursor: pointer;
+}
+
+#reset-button {
+  display: none;
 }

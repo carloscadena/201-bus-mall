@@ -77,6 +77,7 @@ function displayNewThree(){
 function showResults(){
   document.getElementById('pic-container').setAttribute('style', 'display:none');
   document.getElementById('myChart').setAttribute('style', 'display:block');
+  document.getElementById('reset-button').setAttribute('style', 'display:block');
   document.getElementsByTagName('h2')[0].textContent = 'The votes are in...';
   document.getElementsByTagName('h2')[0].setAttribute('style', 'margin:5px');
   var names = [];
@@ -153,9 +154,18 @@ function handleClick(e){
     displayPicThree.removeEventListener('click', handleClick);
     localStorage.setItem('products', JSON.stringify(allProducts));
     showResults();
-    
   }
 }
 
+var resultsButton = document.getElementById('results-button');
+resultsButton.addEventListener('click', function(){
+  if(JSONpresent){showResults();}
+});
+
+var resetButton = document.getElementById('reset-button');
+resetButton.addEventListener('click', function(){
+  localStorage.removeItem('products');
+  showResults();
+});
 
 displayNewThree();
