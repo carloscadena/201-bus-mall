@@ -1,24 +1,51 @@
 body{
   margin: 0 auto;
-  max-width: 75%;
   text-align: center;
+  font-family: 'Sawarabi Mincho', sans-serif;
+  background-color: #D9B99B
 }
 
-img {
-  max-width: 30%;
+header {
+  background-color: #B10607;
+  color: #060B17;
+  text-align: left;
+  height: 75px;
 }
 
 h1 {
+  padding-top: 20px;
+  padding-left: 10px;
   font-size: 40px;
-  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+div img {
+  width: auto;
+  max-height: 200px;
+  padding: 10px;
+}
+
+img:hover {
+  background-color: #2D365B;
+}
+
+h2 {
+  font-size: 40px;
+  margin-top: 30px;
+  margin-bottom: 10%;
 }
 
 #pic-container {
-  position: center;
-  min-height: 25%;
-  max-height: 25%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 30%;
+  width: 90%;
+  border: 10px solid #060B17;
+  background-color: #B10607;
 }
 
-li {
-  padding: 10px;
+canvas {
+  display: none;
+  position: center;
+  margin: 15px auto;
 }
