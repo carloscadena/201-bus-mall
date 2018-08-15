@@ -141,6 +141,7 @@ function handleClick(e){
     displayPicTwo.removeEventListener('click', handleClick);
     displayPicThree.removeEventListener('click', handleClick);
     showResults();
+    localStorage.setItem('products', JSON.stringify(allProducts));
   }
 }
 
