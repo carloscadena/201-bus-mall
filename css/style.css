@@ -22,7 +22,7 @@ h1 {
 div img {
   width: auto;
   max-height: 200px;
-  padding: 10px;
+  padding: 20px 10px;
 }
 
 img:hover {

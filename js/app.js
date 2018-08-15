@@ -85,7 +85,7 @@ function showResults(){
     shown.push(allProducts[i].timesShown);
   }
   var ctx = document.getElementById('myChart').getContext('2d');
-  var myChart = new Chart(ctx, {
+  new Chart(ctx, {
     type: 'bar',
     data: {
       labels: names,
