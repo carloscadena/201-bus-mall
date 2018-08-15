@@ -5,7 +5,6 @@ var displayPicOne = document.getElementById('first-pic');
 var displayPicTwo = document.getElementById('second-pic');
 var displayPicThree = document.getElementById('third-pic');
 
-
 var allProducts = [];
 // constuctor for items
 function Product(item, pathTo, timesShown = 0, votes = 0) {
@@ -20,6 +19,7 @@ var JSONpresent = JSON.parse(localStorage.getItem('products'));
 
 if(JSONpresent){
   for(var i = 0; i < JSONpresent.length; i++){
+    // Create products with existing info
     new Product(JSONpresent[i].item, JSONpresent[i].pathTo, JSONpresent[i].timesShown, JSONpresent[i].votes);
   }
 } else {
@@ -44,15 +44,13 @@ if(JSONpresent){
   new Product('Wiggling Tentacle Usb','img/usb.gif');
   new Product('Water Can','img/water-can.jpg');
   new Product('Wine Glass','img/wine-glass.jpg');
-
 }
-
-
 
 var newThree = [];
 var lastThree = [];
 function displayNewThree(){
   newThree = [];
+  // find random three to show that aren't the same and aren't the last three
   while (newThree.length < 3){
     var idx = Math.floor(Math.random() * allProducts.length);
     if (newThree.includes(allProducts[idx]) || lastThree.includes(allProducts[idx])){
@@ -62,6 +60,7 @@ function displayNewThree(){
     }
   }
   lastThree = newThree;
+  // make pics displayed new random three and add event listeners
   displayPicOne.src = newThree[0].pathTo;
   newThree[0].timesShown++;
   displayPicOne.addEventListener('click', handleClick);
@@ -157,15 +156,16 @@ function handleClick(e){
   }
 }
 
+// allow for user to go straight to results
 var resultsButton = document.getElementById('results-button');
 resultsButton.addEventListener('click', function(){
   if(JSONpresent){showResults();}
 });
 
+// allow for user to reset results
 var resetButton = document.getElementById('reset-button');
 resetButton.addEventListener('click', function(){
   localStorage.removeItem('products');
-  showResults();
 });
 
 displayNewThree();
