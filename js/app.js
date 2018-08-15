@@ -17,26 +17,26 @@ function Product(item, pathTo) {
 }
 
 // create new products
-var bag = new Product('R2 Bag', 'img/bag.jpg');
-var banana = new Product('Banana Slicer','img/banana.jpg');
-var bathroom = new Product('Toilet Paper/i-pad Holder','img/bathroom.jpg');
-var boots = new Product('Open Toed Rainboots','img/boots.jpg');
-var breakfast = new Product('All-in-One Breakfast Maker','img/breakfast.jpg');
-var bubblegum = new Product('Meatball bubblegum','img/bubblegum.jpg');
-var chair = new Product('Round Bottom Chair','img/chair.jpg');
-var cthulhu = new Product('Cthulhu','img/cthulhu.jpg');
-var dogDuck = new Product('Dog duck-bill','img/dog-duck.jpg');
-var dragon = new Product('Dragon Meat','img/dragon.jpg');
-var pen = new Product('Utensil Pen','img/pen.jpg');
-var petSweep = new Product('Pet Sweeper','img/pet-sweep.jpg');
-var scissors = new Product('Pizza Scissors','img/scissors.jpg');
-var shark = new Product('Shark Sleeping Bag','img/shark.jpg');
-var sweep = new Product('Baby Sweeper','img/sweep.png');
-var tauntaun = new Product('Tauntaun','img/tauntaun.jpg');
-var unicorn = new Product('Unicorn Meat','img/unicorn.jpg');
-var usb = new Product('Wiggling Tentacle Usb','img/usb.gif');
-var waterCan = new Product('Water Can','img/water-can.jpg');
-var wineGlass = new Product('Wine Glass','img/wine-glass.jpg');
+new Product('R2 Bag', 'img/bag.jpg');
+new Product('Banana Slicer','img/banana.jpg');
+new Product('Toilet Paper/i-pad Holder','img/bathroom.jpg');
+new Product('Open Toed Rainboots','img/boots.jpg');
+new Product('All-in-One Breakfast Maker','img/breakfast.jpg');
+new Product('Meatball bubblegum','img/bubblegum.jpg');
+new Product('Round Bottom Chair','img/chair.jpg');
+new Product('Cthulhu','img/cthulhu.jpg');
+new Product('Dog duck-bill','img/dog-duck.jpg');
+new Product('Dragon Meat','img/dragon.jpg');
+new Product('Utensil Pen','img/pen.jpg');
+new Product('Pet Sweeper','img/pet-sweep.jpg');
+new Product('Pizza Scissors','img/scissors.jpg');
+new Product('Shark Sleeping Bag','img/shark.jpg');
+new Product('Baby Sweeper','img/sweep.png');
+new Product('Tauntaun','img/tauntaun.jpg');
+new Product('Unicorn Meat','img/unicorn.jpg');
+new Product('Wiggling Tentacle Usb','img/usb.gif');
+new Product('Water Can','img/water-can.jpg');
+new Product('Wine Glass','img/wine-glass.jpg');
 
 var newThree = [];
 var lastThree = [];
@@ -64,14 +64,60 @@ function displayNewThree(){
 
 // display results after 25 clicks
 function showResults(){
-  var resultsList = document.getElementById('list-results')
-
-  for(var i = 0; i < allProducts.length; i++){
-    var newLi = document.createElement('li');
-    newLi.textContent = `${allProducts[i].item} - times shown: ${allProducts[i].timesShown} - selected ${allProducts[i].votes}`;
-    resultsList.appendChild(newLi);
-  }
   document.getElementById('pic-container').setAttribute('style', 'display:none');
+  document.getElementById('myChart').setAttribute('style', 'display:block');
+  document.getElementsByTagName('h2')[0].textContent = 'The votes are in...';
+  document.getElementsByTagName('h2')[0].setAttribute('style', 'margin:5px');
+  var names = [];
+  var votes = [];
+  var colors = [];
+  var shown = [];
+  var dynamicColors = function() {
+    var r = Math.floor(Math.random() * 255);
+    var g = Math.floor(Math.random() * 255);
+    var b = Math.floor(Math.random() * 255);
+    return 'rgb(' + r + ',' + g + ',' + b + ')';
+  };
+  for (var i = 0; i < allProducts.length; i++){
+    names.push(allProducts[i].item);
+    votes.push(allProducts[i].votes);
+    colors.push(dynamicColors());
+    shown.push(allProducts[i].timesShown);
+  }
+  var ctx = document.getElementById('myChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: names,
+      datasets: [{
+        label: 'Votes',
+        data: votes,
+        backgroundColor: colors,
+        borderColor: colors,
+        borderWidth: 1
+      },
+      {
+        label: 'Shown',
+        data: shown,
+        // backgroundColor: colors,
+        borderColor: colors,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: false,
+      // maintainAspectRatio: false,
+      scales: {
+        xAxes: [{
+          stacked: true,
+          ticks: {
+            beginAtZero:true,
+            autoSkip: false,
+          }
+        }]
+      }
+    }
+  });
 
 }
 
