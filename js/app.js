@@ -170,4 +170,4 @@ resetButton.addEventListener('click', function(){
 
 displayNewThree();
 
-console.log('blah')
+console.log('something else')
